@@ -1,0 +1,8 @@
+GitHub Marketplace offers both GitHub Actions and GitHub Apps, each of which can be valuable automation and workflow tools. Understanding the differences and the benefits of each option will allow you to select the best fit for your job.
+
+GitHub Apps:
+
+Run persistently and can react to events quickly.
+Work great when persistent data is needed.
+Work best with API requests that aren't time consuming.
+Run on a server or compute infrastructure that you provide.
