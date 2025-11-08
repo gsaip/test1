@@ -36,6 +36,14 @@ jobs:
 
       - name: Print Hello World
         run: echo "Hello from GitHub Actions!"
+
+      - name: Print inputs
+        run: |
+          echo "User: ${{ github.event.inputs.username }}"
+          echo "Env : ${{ github.event.inputs.environment }}"
+
+      - name: Use Secret Example
+        run: echo "Using Secret Key:${{ secrets.MY_SECRET_KEY }}"
         
       - name: List files in repository
         run: |
