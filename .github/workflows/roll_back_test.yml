@@ -17,6 +17,12 @@ jobs:
         id: first_commit
         run: echo "hash=$(git rev-list --max-parents=0 HEAD)" >> $GITHUB_OUTPUT
 
+      - name: test_repo
+        run: |
+          ls -la
+          pwd
+      
+
       - name: Restore payment-auth from first commit
         run: |
           FILE="test1/f2.txt"
