@@ -21,6 +21,9 @@ jobs:
           ls -la
           git branch 
           pwd
+
+          cat f2.txt
+          echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
   test:
     runs-on: ubuntu-latest
     needs: build   
