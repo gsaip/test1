@@ -1,7 +1,12 @@
 GitHub Apps:
 
-Run persistently and can react to events quickly.
+Run
+
+
+
+and can react to events quickly.
 Work great when persistent data is needed.
 Work best with Ame consuming.
 Run on a server or compute infrastructure that you provide.
+
 
