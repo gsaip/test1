@@ -1,9 +1,25 @@
 name: My First Workflow
 
-on: 
+on:
   push:
     branches:
       - main
+  
+  workflow_dispatch:
+    inputs:
+      username:
+        description: "Enter your name"
+        required: true
+        default: "Sai"
+      environment:
+        description: "Select deployment environment"
+        required: true
+        default: "dev"
+        type: choice
+        options:
+          - dev
+          - test
+          - prod
 
 jobs:
   build:
@@ -12,6 +28,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Print Input Parameters
+        run: |
+          echo "Username: ${{ github.event.inputs.username }}"
+          echo "Environment: ${{ github.event.inputs.environment }}"
 
       - name: Print Hello World
         run: echo "Hello from GitHub Actions!"
@@ -22,8 +43,9 @@ jobs:
           git branch 
           pwd
 
-          cat f2.txt
+          cat f2.txt || echo "f2.txt not found"
           echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
   test:
     runs-on: ubuntu-latest
     needs: build   
@@ -32,5 +54,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Print Test Message
-        run: echo "This is the second job running!"
+      - name: Print Test Message with Inputs
+        run: |
+          echo "Running test job for user: ${{ github.event.inputs.username }}"
+          echo "Environment selected: ${{ github.event.inputs.environment }}"
+          echo "This is the second job running!"
