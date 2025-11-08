@@ -1,0 +1,48 @@
+name: My First Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      username:
+        description: "Enter your name"
+        required: true
+      environment:
+        description: "Deployment environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - qa
+          - prod
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate inputs
+        run: |
+          if [[ "${{ github.event.inputs.username }}" == "" ]]; then
+            echo "Username cannot be empty!" && exit 1
+          fi
+          echo "Inputs are valid ✅"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: validate
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print inputs
+        run: |
+          echo "User: ${{ github.event.inputs.username }}"
+          echo "Env : ${{ github.event.inputs.environment }}"
+
+      - name: Use Secret Example
+        run: echo "Using Secret Key: ${{ secrets.MY_SECRET_KEY }}"
+
+      - name: Run Deploy Script with Parameters
+        run: |
+          chmod +x deploy.sh
+          ./deploy.sh "${{ github.event.inputs.username }}" "${{ github.event.inputs.environment }}"
