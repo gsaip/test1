@@ -40,7 +40,7 @@ jobs:
           echo "Env : ${{ github.event.inputs.environment }}"
 
       - name: Use Secret Example
-        run: echo "Using Secret Key: ${{ secrets.MY_SECRET_KEY }}"
+        run: echo "Using Secret Key:${{ secrets.MY_SECRET_KEY }}"
 
       - name: Run Deploy Script with Parameters
         run: |
